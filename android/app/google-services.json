@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "30536906711",
+    "project_id": "flutter-practice-e7ef2",
+    "storage_bucket": "flutter-practice-e7ef2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30536906711:android:c22291b9cfb6cbf0267d92",
+        "android_client_info": {
+          "package_name": "com.example.gym_setup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "30536906711-btie6g9fsk18d6blqjdp25vsij4kff74.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvIE8WftqzNHSjOvsY08JdM_DGYtX3uXg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "30536906711-btie6g9fsk18d6blqjdp25vsij4kff74.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "30536906711-pc7haekmafrsvjic0h7uurkg8b08nd87.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.gymSetup"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
