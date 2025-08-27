@@ -18,6 +18,7 @@ class OnboardingController extends GetxController {
   var bmiStatus = ''.obs;
   final focuson = OnboardingModel(focusOn: []).obs;
   final badHabitmodel = OnboardingModel(badHabit: []).obs;
+  final motivateModel =OnboardingModel(motivate: []).obs;
   @override
   void onInit(){
     super.onInit();
@@ -302,7 +303,7 @@ class OnboardingController extends GetxController {
   }
   void submitBadhabit() {
     if (badHabitmodel.value.badHabit!.isNotEmpty) {
-      print("Focus Areas Submitted: ${badHabitmodel.value.badHabit}");
+      print("badhabit Areas Submitted: ${badHabitmodel.value.badHabit}");
       // Navigate to the next screen
       Get.toNamed(AppRoutes.ONBOARDING_LIFESTYLE);
     } else {
@@ -319,6 +320,66 @@ class OnboardingController extends GetxController {
       val?.lifeStyle = lifestyle;
     });
     print('selected lifestyle ${onboarding.value.lifeStyle}');
-    // Get.toNamed(AppRoutes.ONBOARDING_WALKDAILY);
+    Get.toNamed(AppRoutes.ONBOARDING_IDEALWEIGHT);
+  }
+  void submitidealWeight(String idealWeight){
+    onboarding.update((val){
+      val?.idealWeight = idealWeight;
+    });
+    print('selected idealWeight ${onboarding.value.idealWeight}');
+    Get.toNamed(AppRoutes.ONBOARDING_SLEEP);
+  }
+  void submitSleep(String sleepTime){
+    onboarding.update((val){
+      val?.sleepTime = sleepTime;
+    });
+    print('selected sleepTime ${onboarding.value.sleepTime}');
+    Get.toNamed(AppRoutes.ONBOARDING_GETUP_BED);
+  }
+  void submitGetup(String GetupTime){
+    onboarding.update((val){
+      val?.GetupTime = GetupTime;
+    });
+    print('selected GetupTime ${onboarding.value.GetupTime}');
+    Get.toNamed(AppRoutes.ONBOARDING_FEELWAKEUP);
+  }
+  void submitWakeup(String wakeupTime){
+    onboarding.update((val){
+      val?.wakeupTime = wakeupTime;
+    });
+    print('selected wakeupTime ${onboarding.value.wakeupTime}');
+    Get.toNamed(AppRoutes.ONBOARDING_FEELSTRESSED);
+  }
+  void submitFeelStressed(String feelStressed){
+    onboarding.update((val){
+      val?.feelStressed = feelStressed;
+    });
+    print('selected feelStressed ${onboarding.value.feelStressed}');
+    Get.toNamed(AppRoutes.ONBOARDING_MOTIVATE);
+  }
+
+  void toggleMotivate(String motivate){
+    motivateModel.update((val){
+      if(val!.motivate!.contains(motivate)){
+        val.motivate!.remove(motivate);
+      }else{
+        val.motivate!.add(motivate);
+      }
+    });
+    print("updated bad habit on:${motivateModel.value.motivate}");
+  }
+  void submitMotivate() {
+    if (motivateModel.value.motivate!.isNotEmpty) {
+      print("motivate Areas Submitted: ${motivateModel.value.motivate}");
+      // Navigate to the next screen
+      // Get.toNamed(AppRoutes.ONBOARDING_LIFESTYLE);
+    } else {
+      // If the list is empty, show an error message
+      Get.snackbar(
+        "Selection Required",
+        "Please select at least one focus area.",
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
   }
 }

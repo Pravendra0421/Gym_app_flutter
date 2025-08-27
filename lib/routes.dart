@@ -20,6 +20,12 @@ import 'onboarding/presentation_layer/screens/plank_screen.dart';
 import 'onboarding/presentation_layer/screens/walk_daily_screen.dart';
 import 'onboarding/presentation_layer/screens/bad_habit_screen.dart';
 import 'onboarding/presentation_layer/screens/lifeStyle_screen.dart';
+import 'onboarding/presentation_layer/screens/ideal_weight_screen.dart';
+import 'onboarding/presentation_layer/screens/sleep_screen.dart';
+import 'onboarding/presentation_layer/screens/getup_bed_screen.dart';
+import 'onboarding/presentation_layer/screens/feel_wakeup_screen.dart';
+import 'onboarding/presentation_layer/screens/feel_stressed_screen.dart';
+import 'onboarding/presentation_layer/screens/motivate_screen.dart';
 
 class AppRoutes{
   static const ONBOARDING_GENDER ='/onboarding-gender';
@@ -42,6 +48,13 @@ class AppRoutes{
   static const ONBOARDING_WALKDAILY ='/onboarding-walkdaily';
   static const ONBOARDING_BADHABIT ='/onboarding-bad-habit';
   static const ONBOARDING_LIFESTYLE ='/onboarding-lifeStyle';
+  static const ONBOARDING_IDEALWEIGHT = '/onboarding-idealWeight';
+  static const ONBOARDING_SLEEP = '/onboarding-sleep';
+  static const ONBOARDING_GETUP_BED ='/onboarding-GETUP-BED';
+  static const ONBOARDING_FEELWAKEUP ='/onboarding-feelwakeup';
+  static const ONBOARDING_FEELSTRESSED = '/onboarding-feelStressed';
+  static const ONBOARDING_MOTIVATE = '/onboarding-motivate';
+
 }
 class AppPages {
   static final routes =[
@@ -143,6 +156,36 @@ class AppPages {
     GetPage(
         name: AppRoutes.ONBOARDING_LIFESTYLE,
         page: ()=>LifeStyleScreen(),
+        binding: OnboardingBinding(),
+    ),
+    GetPage(
+        name: AppRoutes.ONBOARDING_IDEALWEIGHT,
+        page: ()=>IdealWeightScreen(),
+        binding: OnboardingBinding(),
+    ),
+    GetPage(
+        name: AppRoutes.ONBOARDING_SLEEP,
+        page: ()=>SleepScreen(),
+        binding: OnboardingBinding(),
+    ),
+    GetPage(
+        name: AppRoutes.ONBOARDING_GETUP_BED,
+        page: ()=>GETUPScreen(),
+        binding: OnboardingBinding(),
+    ),
+    GetPage(
+        name: AppRoutes.ONBOARDING_FEELWAKEUP,
+        page: ()=>feelWakeUpScreen(),
+        binding: OnboardingBinding(),
+    ),
+    GetPage(
+        name: AppRoutes.ONBOARDING_FEELSTRESSED,
+        page: ()=>FeelStressedScreen(),
+        binding: OnboardingBinding(),
+    ),
+    GetPage(
+        name: AppRoutes.ONBOARDING_MOTIVATE,
+        page: ()=>MotivateScreen(),
         binding: OnboardingBinding(),
     ),
   ];

@@ -22,6 +22,12 @@ class OnboardingModel{
   String? walk_daily;
   List<String>? badHabit;
   String? lifeStyle;
+  String? idealWeight;
+  String? sleepTime;
+  String? GetupTime;
+  String? wakeupTime;
+  String? feelStressed;
+  List<String>? motivate;
   OnboardingModel({
     this.gender,
     this.age,
@@ -43,6 +49,12 @@ class OnboardingModel{
     this.plank_reps,
     this.walk_daily,
     this.badHabit,
-    this.lifeStyle
+    this.lifeStyle,
+    this.idealWeight,
+    this.sleepTime,
+    this.GetupTime,
+    this.wakeupTime,
+    this.feelStressed,
+    this.motivate
   });
 }
