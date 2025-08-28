@@ -28,6 +28,18 @@ class OnboardingModel{
   String? wakeupTime;
   String? feelStressed;
   List<String>? motivate;
+  List<String>? workOutPlace;
+  String? excludeloud;
+  String?eventcomingup;
+  String?eventTime;
+  String?commitTime;
+  int? LengthWorkout;
+  String? profileName;
+  String? planPace;
+  List<String>? trainingDays;
+  bool? remainders;
+  String? hearAbout;
+
   OnboardingModel({
     this.gender,
     this.age,
@@ -55,6 +67,17 @@ class OnboardingModel{
     this.GetupTime,
     this.wakeupTime,
     this.feelStressed,
-    this.motivate
+    this.motivate,
+    this.workOutPlace,
+    this.excludeloud,
+    this.eventcomingup,
+    this.eventTime,
+    this.commitTime,
+    this.LengthWorkout,
+    this.profileName,
+    this.planPace,
+    this.trainingDays,
+    this.remainders,
+    this.hearAbout
   });
 }

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
@@ -5,20 +6,29 @@ import 'package:get/get.dart';
 import '../../data_layer/models/onboarding_model.dart';
 import '../../../routes.dart';
 class OnboardingController extends GetxController {
-  final onboarding = OnboardingModel().obs;
+  final onboarding = OnboardingModel(
+    trainingDays: []
+  ).obs;
   late TextEditingController ageController;
   late TextEditingController heightCmController;
   late TextEditingController heightFeetController;
   late TextEditingController heightInchesController;
   late TextEditingController weightKgController;
   late TextEditingController weightLbsController;
+  late TextEditingController nameController;
   var isCm = true.obs;
   var isKg = true.obs;
   var bmi = 0.0.obs;
   var bmiStatus = ''.obs;
+  var remainder = true.obs;
   final focuson = OnboardingModel(focusOn: []).obs;
   final badHabitmodel = OnboardingModel(badHabit: []).obs;
   final motivateModel =OnboardingModel(motivate: []).obs;
+  final workoutModel = OnboardingModel(workOutPlace:  []).obs;
+  var progress =0.0.obs;
+  var topMessage ='Analyzing your Data'.obs;
+  var midMessage ='Plans for real Results'.obs;
+  var bottomWidgetType = 'testimonials'.obs;
   @override
   void onInit(){
     super.onInit();
@@ -28,6 +38,7 @@ class OnboardingController extends GetxController {
     heightInchesController = TextEditingController();
     weightKgController = TextEditingController();
     weightLbsController = TextEditingController();
+    nameController = TextEditingController();
     weightKgController.addListener(() => calculateBmi(weightKgController.text));
     weightLbsController.addListener(() => calculateBmi(weightLbsController.text));
   }
@@ -39,6 +50,7 @@ class OnboardingController extends GetxController {
     heightInchesController.dispose();
     weightKgController.dispose();
     weightLbsController.dispose();
+    nameController.dispose();
     weightKgController.removeListener(() => calculateBmi(weightKgController.text));
     weightLbsController.removeListener(() => calculateBmi(weightLbsController.text));
     super.onClose();
@@ -366,13 +378,13 @@ class OnboardingController extends GetxController {
         val.motivate!.add(motivate);
       }
     });
-    print("updated bad habit on:${motivateModel.value.motivate}");
+    print("updated motivate on:${motivateModel.value.motivate}");
   }
   void submitMotivate() {
     if (motivateModel.value.motivate!.isNotEmpty) {
       print("motivate Areas Submitted: ${motivateModel.value.motivate}");
       // Navigate to the next screen
-      // Get.toNamed(AppRoutes.ONBOARDING_LIFESTYLE);
+      Get.toNamed(AppRoutes.ONBOARDING_HEALTHIER);
     } else {
       // If the list is empty, show an error message
       Get.snackbar(
@@ -382,4 +394,144 @@ class OnboardingController extends GetxController {
       );
     }
   }
+  void submitHealthier(){
+    Get.toNamed(AppRoutes.ONBOARDING_WORKOUTPLACE);
+  }
+  void toggleWorkout(String workOutPlace){
+    workoutModel.update((val){
+      if(val!.workOutPlace!.contains(workOutPlace)){
+        val.workOutPlace!.remove(workOutPlace);
+      }else{
+        val.workOutPlace!.add(workOutPlace);
+      }
+    });
+    print("updated workout place on :${workoutModel.value.workOutPlace}");
+  }
+  void submitWorkout(){
+    if(workoutModel.value.workOutPlace!.isNotEmpty){
+      print("Workout areas submmited:${workoutModel.value.workOutPlace}");
+      Get.toNamed(AppRoutes.ONBOARDING_EXCLUDELOUD);
+    }else {
+      // If the list is empty, show an error message
+      Get.snackbar(
+        "Selection Required",
+        "Please select at least one focus area.",
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
+  }
+  void submitExcludeLoud(String excludeloud){
+    onboarding.update((val){
+      val?.excludeloud = excludeloud;
+    });
+    print('selected excludeloud ${onboarding.value.excludeloud}');
+    Get.toNamed(AppRoutes.ONBOARDING_EVENT_COMINGUP);
+  }
+  void submitEventComingup(String eventcomingup){
+    onboarding.update((val){
+      val?.eventcomingup = eventcomingup;
+    });
+    print('selected eventcomingup ${onboarding.value.eventcomingup}');
+    Get.toNamed(AppRoutes.ONBOARDING_EVENT_TIME);
+  }
+  void submitEventTime(String eventTime){
+    onboarding.update((val){
+      val?.eventTime = eventTime;
+    });
+    print('selected eventTime ${onboarding.value.eventTime}');
+    Get.toNamed(AppRoutes.ONBOARDING_READYTOCOMMIT);
+  }
+  void submitReadyTocommit(String commitTime){
+    onboarding.update((val){
+      val?.commitTime = commitTime;
+    });
+    print('selected commitTime ${onboarding.value.commitTime}');
+    Get.toNamed(AppRoutes.ONBOARDING_POSITVEIMPACT);
+  }
+  void positiveImpact(){
+    Get.toNamed(AppRoutes.ONBOARDING_LENGTH_WORKOUT);
+  }
+  void submitLength(int LengthWorkout){
+    onboarding.update((val){
+      val?.LengthWorkout =LengthWorkout;
+    });
+    print('submitted length workout : ${onboarding.value.LengthWorkout}');
+    Get.toNamed(AppRoutes.ONBOARDING_PROFILE_NAME);
+  }
+  void submitProfileName(){
+    if(nameController.text.isNotEmpty){
+      final name = nameController.text;
+      onboarding.update((val){
+        val?.profileName = name;
+      });
+      print("saved profileName: ${onboarding.value.profileName}");
+      Get.toNamed(AppRoutes.ONBOARDING_PLAN_PACE);
+    }else{
+      Get.snackbar("Mising Profile name", "please enter the profile name");
+    }
+  }
+  void submitPlanPace(String planPace){
+    onboarding.update((val){
+      val?.planPace = planPace;
+    });
+    print('selected planPace: ${onboarding.value.planPace}');
+    Get.toNamed(AppRoutes.ONBOARDING_TRAINING_DAYS);
+  }
+  void toggleTrainingdays(String day){
+    onboarding.update((val){
+      if(val!.trainingDays!.contains(day)){
+        val.trainingDays!.remove(day);
+      }else{
+        val.trainingDays!.add(day);
+      }
+    });
+    print('selected Days : ${onboarding.value.trainingDays}');
+  }
+  void toggleRemainder(bool isEnabled){
+    remainder.value = isEnabled;
+    print('remaider enabled : ${remainder.value}');
+  }
+  void submitTrainigDays(){
+    if(onboarding.value.trainingDays!.isNotEmpty){
+      print('final days submitted ${onboarding.value.trainingDays}');
+      print("remainder are ${remainder.value ? "ON":"OFF"}");
+      Get.toNamed(AppRoutes.ONBOARDING_HEAR_ABOUT);
+    }
+  }
+  void submitHearAbout(String hearAbout){
+    onboarding.update((val){
+      val?.hearAbout = hearAbout;
+    });
+    print('selected hearAbout: ${onboarding.value.hearAbout}');
+    Get.toNamed(AppRoutes.ONBOARDING_PLAN_LOADING);
+  }
+  void startLoadingProcess() {
+    progress.value = 0.0;
+    bottomWidgetType.value = 'testimonials'; // Start with testimonials
+
+    Timer.periodic(const Duration(milliseconds: 50), (timer) {
+      if (progress.value >= 1.0) {
+        timer.cancel();
+        Get.offNamed(AppRoutes.ONBOARDING_PLAN_READY);
+      } else {
+        progress.value += 0.01;
+
+        // Update text and bottom widget based on progress
+        if (progress.value > 0.91) {
+          topMessage.value = 'Building your first week';
+          midMessage.value = 'Top Rated Fitness App';
+          bottomWidgetType.value = 'trusted_by'; // Show the trusted by card
+        } else if (progress.value > 0.87) {
+          topMessage.value = 'Creating your plan';
+          midMessage.value = '87% success rate';
+          bottomWidgetType.value = 'activity_question'; // Show activity question
+        } else if (progress.value > 0.37) {
+          topMessage.value = 'Analyzing your data';
+          midMessage.value = 'Plans for real Results';
+          bottomWidgetType.value = 'lunch_question'; // Show lunch question
+        }
+      }
+    });
+  }
+
 }

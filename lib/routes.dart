@@ -26,6 +26,20 @@ import 'onboarding/presentation_layer/screens/getup_bed_screen.dart';
 import 'onboarding/presentation_layer/screens/feel_wakeup_screen.dart';
 import 'onboarding/presentation_layer/screens/feel_stressed_screen.dart';
 import 'onboarding/presentation_layer/screens/motivate_screen.dart';
+import 'onboarding/presentation_layer/screens/healthier_happier_screen.dart';
+import 'onboarding/presentation_layer/screens/workout_place_screen.dart';
+import 'onboarding/presentation_layer/screens/exclude_loud_screen.dart';
+import 'onboarding/presentation_layer/screens/event_comingup_screen.dart';
+import 'onboarding/presentation_layer/screens/event_time_screen.dart';
+import 'onboarding/presentation_layer/screens/ready_to_commit_screen.dart';
+import 'onboarding/presentation_layer/screens/positive_impact_screen.dart';
+import 'onboarding/presentation_layer/screens/Length_workout_screen.dart';
+import 'onboarding/presentation_layer/screens/profile_name_screen.dart';
+import 'onboarding/presentation_layer/screens/plan_pace_screen.dart';
+import 'onboarding/presentation_layer/screens/training_days_screen.dart';
+import 'onboarding/presentation_layer/screens/hear_about_survey_screen.dart';
+import 'onboarding/presentation_layer/screens/plans_loading_screen.dart';
+import 'onboarding/presentation_layer/screens/plan_ready_screen.dart';
 
 class AppRoutes{
   static const ONBOARDING_GENDER ='/onboarding-gender';
@@ -54,6 +68,20 @@ class AppRoutes{
   static const ONBOARDING_FEELWAKEUP ='/onboarding-feelwakeup';
   static const ONBOARDING_FEELSTRESSED = '/onboarding-feelStressed';
   static const ONBOARDING_MOTIVATE = '/onboarding-motivate';
+  static const ONBOARDING_HEALTHIER = '/onboarding-healthier';
+  static const ONBOARDING_WORKOUTPLACE = '/onboarding-workout';
+  static const ONBOARDING_EXCLUDELOUD = '/onboarding-exclude-loud';
+  static const ONBOARDING_EVENT_COMINGUP = '/onboarding-event-comingup';
+  static const ONBOARDING_EVENT_TIME = '/onboarding-event-time';
+  static const ONBOARDING_READYTOCOMMIT = '/onboarding-ready_to_commit';
+  static const ONBOARDING_POSITVEIMPACT ='/onboarding-positive-imppact';
+  static const ONBOARDING_LENGTH_WORKOUT = '/onboarding-length-workout';
+  static const ONBOARDING_PROFILE_NAME = '/onboarding-profile-name';
+  static const ONBOARDING_PLAN_PACE = '/onboarding-plan-pace';
+  static const ONBOARDING_TRAINING_DAYS ='/onboarding-tranning-days';
+  static const ONBOARDING_HEAR_ABOUT = '/onboarding-hear-about';
+  static const ONBOARDING_PLAN_LOADING = '/onboarding-plan-loading';
+  static const ONBOARDING_PLAN_READY = '/onboarding-plan-ready';
 
 }
 class AppPages {
@@ -186,6 +214,76 @@ class AppPages {
     GetPage(
         name: AppRoutes.ONBOARDING_MOTIVATE,
         page: ()=>MotivateScreen(),
+        binding: OnboardingBinding(),
+    ),
+    GetPage(
+        name: AppRoutes.ONBOARDING_HEALTHIER,
+        page: ()=>HealthierScreen(),
+        binding: OnboardingBinding(),
+    ),
+    GetPage(
+        name: AppRoutes.ONBOARDING_WORKOUTPLACE,
+        page: ()=>WorkOutScreen(),
+        binding: OnboardingBinding(),
+    ),
+    GetPage(
+        name: AppRoutes.ONBOARDING_EXCLUDELOUD,
+        page: ()=>ExcludeLoudScreen(),
+        binding: OnboardingBinding(),
+    ),
+    GetPage(
+        name: AppRoutes.ONBOARDING_EVENT_COMINGUP,
+        page: ()=>EventScreen(),
+        binding: OnboardingBinding(),
+    ),
+    GetPage(
+        name: AppRoutes.ONBOARDING_EVENT_TIME,
+        page: ()=>EventTimeScreen(),
+        binding: OnboardingBinding(),
+    ),
+    GetPage(
+        name: AppRoutes.ONBOARDING_READYTOCOMMIT,
+        page: ()=>ReadyTocommit(),
+        binding: OnboardingBinding(),
+    ),
+    GetPage(
+        name: AppRoutes.ONBOARDING_POSITVEIMPACT,
+        page: ()=>PositiveImpact(),
+        binding: OnboardingBinding(),
+    ),
+    GetPage(
+        name: AppRoutes.ONBOARDING_LENGTH_WORKOUT,
+        page: ()=>LengthWorkout(),
+        binding: OnboardingBinding(),
+    ),
+    GetPage(
+        name: AppRoutes.ONBOARDING_PROFILE_NAME,
+        page: ()=>ProfileName(),
+        binding: OnboardingBinding(),
+    ),
+    GetPage(
+        name: AppRoutes.ONBOARDING_PLAN_PACE,
+        page: ()=>PlanPace(),
+        binding: OnboardingBinding(),
+    ),
+    GetPage(
+        name: AppRoutes.ONBOARDING_TRAINING_DAYS,
+        page: ()=>Trainingdays(),
+        binding: OnboardingBinding(),
+    ),
+    GetPage(
+        name: AppRoutes.ONBOARDING_HEAR_ABOUT,
+        page: ()=>AboutHear(),
+        binding: OnboardingBinding(),
+    ),
+    GetPage(
+        name: AppRoutes.ONBOARDING_PLAN_LOADING,
+        page: ()=>PlanLoading(),
+        binding: OnboardingBinding(),
+    ),
+    GetPage(
+        name: AppRoutes.ONBOARDING_PLAN_READY,
+        page: ()=>PlanReady(),
         binding: OnboardingBinding(),
     ),
   ];
