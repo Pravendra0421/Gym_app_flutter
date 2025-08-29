@@ -521,17 +521,21 @@ class OnboardingController extends GetxController {
           topMessage.value = 'Building your first week';
           midMessage.value = 'Top Rated Fitness App';
           bottomWidgetType.value = 'trusted_by'; // Show the trusted by card
-        } else if (progress.value > 0.87) {
+        } else if (progress.value > 0.57) {
           topMessage.value = 'Creating your plan';
           midMessage.value = '87% success rate';
-          bottomWidgetType.value = 'activity_question'; // Show activity question
-        } else if (progress.value > 0.37) {
+          bottomWidgetType.value = 'exercises'; // Show activity question
+        }else {
+          // From 0% to 37%
           topMessage.value = 'Analyzing your data';
           midMessage.value = 'Plans for real Results';
-          bottomWidgetType.value = 'lunch_question'; // Show lunch question
+          bottomWidgetType.value = 'testimonials'; // Use the correct string for TestinomialScroll
         }
       }
     });
   }
+  // void submitReady_plan(){
+  //   Get.toNamed(AppRoutes.ONBOARDING_PLAN_READY);
+  // }
 
 }

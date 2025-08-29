@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gym_setup/onboarding/component/ExerciseScroll.dart';
 import '../controllers/onboarding_controller.dart';
 import '../../component/TestinomialScroll.dart';
-import '../../component/ExerciseScroll.dart';
+// import '../../component/ExerciseScroll.dart';
+import '../../component/trusted_by_user.dart';
 class PlanLoading extends GetView<OnboardingController>{
   const PlanLoading ({super.key});
   @override
@@ -54,8 +56,17 @@ class PlanLoading extends GetView<OnboardingController>{
                 )
             ),
             const Spacer(),
-            // TestinomialScroll(),
-            ExerciseScroll(),
+            Obx(() {
+              switch (controller.bottomWidgetType.value) {
+                case 'exercises':
+                  return ExerciseScroll();
+                case 'trusted_by':
+                  return TrustedByCard();
+                case 'testimonials':
+                default:
+                  return TestinomialScroll();
+              }
+            }),
             const SizedBox(height: 20),
 
           ],
