@@ -40,7 +40,7 @@ class BadHabitScreen extends GetView<OnboardingController> {
                               () => SelectionBox(
                             title: bodyType.title,
                             height: 80,
-                            isSelected: controller.badHabitmodel.value.badHabit!
+                            isSelected: controller.onboarding.value.badHabit!
                                 .contains(bodyType.id),
                             onTap: () =>
                                 controller.togglebadHabit(bodyType.id),

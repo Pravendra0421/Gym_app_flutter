@@ -48,7 +48,7 @@ class FocusOnScreen extends GetView<OnboardingController> {
                           child: SelectionBox(
                             title: bodyType.title,
                             height: 80,
-                            isSelected: controller.focuson.value.focusOn! // Change is here
+                            isSelected: controller.onboarding.value.focusOn! // Change is here
                                 .contains(bodyType.id),
                             onTap: () => controller.toggleFocusOn(bodyType.id),
                           ),

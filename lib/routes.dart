@@ -40,6 +40,9 @@ import 'onboarding/presentation_layer/screens/training_days_screen.dart';
 import 'onboarding/presentation_layer/screens/hear_about_survey_screen.dart';
 import 'onboarding/presentation_layer/screens/plans_loading_screen.dart';
 import 'onboarding/presentation_layer/screens/plan_ready_screen.dart';
+import 'onboarding/presentation_layer/screens/SignupWithEmail_screen.dart';
+import 'My_PLAN/presentation_layer/screens/Home_screen.dart';
+
 
 class AppRoutes{
   static const ONBOARDING_GENDER ='/onboarding-gender';
@@ -82,6 +85,8 @@ class AppRoutes{
   static const ONBOARDING_HEAR_ABOUT = '/onboarding-hear-about';
   static const ONBOARDING_PLAN_LOADING = '/onboarding-plan-loading';
   static const ONBOARDING_PLAN_READY = '/onboarding-plan-ready';
+  static const ONBOARDING_SIGNUPWITHEMAIL ='/onboarding-signup';
+  static const ONBOARDING_HOME  = '/onboarding-home';
 
 }
 class AppPages {
@@ -284,6 +289,16 @@ class AppPages {
     GetPage(
         name: AppRoutes.ONBOARDING_PLAN_READY,
         page: ()=>PlanReady(),
+        binding: OnboardingBinding(),
+    ),
+    GetPage(
+        name: AppRoutes.ONBOARDING_HOME,
+        page: ()=>HomeScreen(),
+        binding: OnboardingBinding(),
+    ),
+    GetPage(
+        name: AppRoutes.ONBOARDING_SIGNUPWITHEMAIL,
+        page: ()=>SignupScreen(),
         binding: OnboardingBinding(),
     ),
   ];

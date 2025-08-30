@@ -40,7 +40,7 @@ class WorkOutScreen extends GetView<OnboardingController> {
                               () => SelectionBox(
                             title: bodyType.title,
                             height: 80,
-                            isSelected: controller.workoutModel.value.workOutPlace!
+                            isSelected: controller.onboarding.value.workOutPlace!
                                 .contains(bodyType.id),
                             onTap: () =>
                                 controller.toggleWorkout(bodyType.id),

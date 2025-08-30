@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/onboarding_controller.dart';
 import '../../component/selection.dart';
+import 'Login_bottom_screen.dart';
 class GenderScreen extends GetView<OnboardingController>{
   const GenderScreen({super.key});
   @override
@@ -69,7 +70,11 @@ class GenderScreen extends GetView<OnboardingController>{
                 const SizedBox(height: 8,),
                 ElevatedButton(
                   onPressed: () {
-                    // Add your login navigation logic here
+                    Get.bottomSheet(
+                      const LoginBottomSheet(),
+                      backgroundColor: Colors.transparent,
+                      isScrollControlled: true,
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,

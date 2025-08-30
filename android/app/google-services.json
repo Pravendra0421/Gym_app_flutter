@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "30536906711-r0ffatsk9k0a9t84rc8krrl5prdvqdkf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gym_setup",
+            "certificate_hash": "c51e68aa124fd1a2db938f620a7ebea2b8ebbd85"
+          }
+        },
+        {
           "client_id": "30536906711-btie6g9fsk18d6blqjdp25vsij4kff74.apps.googleusercontent.com",
           "client_type": 3
         }

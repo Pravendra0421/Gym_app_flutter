@@ -69,12 +69,12 @@ class PlanReady extends GetView<OnboardingController> {
                           ],
                         ),
                       ),
-                      const SizedBox(width: 8),
+                      // const SizedBox(width: 4),
                       // Add some space
                       // THE FIX IS HERE: The Positioned widget has been removed.
                       Image.asset(
                         'assets/images/plan_ready.png',
-                        height: 250,
+                        height: 180,
                       ),
                     ],
                   ),
@@ -171,7 +171,7 @@ class PlanReady extends GetView<OnboardingController> {
                           ),
                         ],
                       ),
-                      const SizedBox(width: 60),
+                      // const SizedBox(width: 40),
                       // Add some space// Add some space
                       Center(
                         child: Image.asset(

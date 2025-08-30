@@ -40,7 +40,7 @@ class MotivateScreen extends GetView<OnboardingController> {
                               () => SelectionBox(
                             title: bodyType.title,
                             height: 80,
-                            isSelected: controller.motivateModel.value.motivate!
+                            isSelected: controller.onboarding.value.motivate!
                                 .contains(bodyType.id),
                             onTap: () =>
                                 controller.toggleMotivate(bodyType.id),

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/onboarding_controller.dart';
 
-class AuthBottomSheet extends GetView<OnboardingController> {
-  const AuthBottomSheet({super.key});
+class LoginBottomSheet extends GetView<OnboardingController> {
+  const LoginBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class AuthBottomSheet extends GetView<OnboardingController> {
         mainAxisSize: MainAxisSize.min,
         children: [
           const Text(
-            "We'll sync your profile across all your devices.",
+            "Log  in to your account",
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
@@ -30,7 +30,7 @@ class AuthBottomSheet extends GetView<OnboardingController> {
             text: "Continue with Google",
             iconPath: 'assets/images/icons8-google-94.png',
             onPressed: () {
-              controller.handleGoogleSignIn();
+              controller.handleGoogleLogIn();
             },
           ),
           const SizedBox(height: 16),
@@ -57,7 +57,7 @@ class AuthBottomSheet extends GetView<OnboardingController> {
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () {
-                controller.submitHandleSigupPage(); // we willl add the this
+                // controller.submitHandleLoginPage(); // we willl add the this
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.grey.shade200,
@@ -67,14 +67,8 @@ class AuthBottomSheet extends GetView<OnboardingController> {
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
-              child: const Text("Sign up with email"),
+              child: const Text("Log in with email"),
             ),
-          ),
-          const SizedBox(height: 24),
-          const Text(
-            "By signing up you agree to Terms of Service and Privacy Policy.",
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.grey, fontSize: 12),
           ),
         ],
       ),

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class OnboardingModel{
   String? gender;
   int? age;
@@ -78,6 +76,48 @@ class OnboardingModel{
     this.planPace,
     this.trainingDays,
     this.remainders,
-    this.hearAbout
+    this.hearAbout,
   });
+  Map<String, dynamic> toJson() {
+    return {
+      'gender': gender,
+      'age': age,
+      'height': height,
+      'currentWeight': currentWeight,
+      'bmiStatus': bmiStatus,
+      'goal': goal,
+      'bodyType': bodyType,
+      'targetWeight': targetWeight,
+      'dreamBodyShape': dreamBodyShape,
+      'focusOn': focusOn,
+      'workoutExperiance': workoutExperiance,
+      'fitness': fitness,
+      'self_assessed_activity': self_assessed_activity,
+      'knee': knee,
+      'squat_reps': squat_reps,
+      'pushups_reps': pushups_reps,
+      'crunches_reps': crunches_reps,
+      'plank_reps': plank_reps,
+      'walk_daily': walk_daily,
+      'badHabit': badHabit,
+      'lifeStyle': lifeStyle,
+      'idealWeight': idealWeight,
+      'sleepTime': sleepTime,
+      'GetupTime': GetupTime,
+      'wakeupTime': wakeupTime,
+      'feelStressed': feelStressed,
+      'motivate': motivate,
+      'workOutPlace': workOutPlace,
+      'excludeloud': excludeloud,
+      'eventcomingup': eventcomingup,
+      'eventTime': eventTime,
+      'commitTime': commitTime,
+      'LengthWorkout': LengthWorkout,
+      'profileName': profileName,
+      'planPace': planPace,
+      'trainingDays': trainingDays,
+      'remainders': remainders,
+      'hearAbout': hearAbout,
+    };
+  }
 }

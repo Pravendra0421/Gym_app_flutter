@@ -1,14 +1,23 @@
 import 'dart:async';
-import 'dart:ffi';
-
+import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import '../../data_layer/models/onboarding_model.dart';
 import '../../../routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import '../../data_layer/repository/onboarding_repository.dart';
 class OnboardingController extends GetxController {
   final onboarding = OnboardingModel(
-    trainingDays: []
+    trainingDays: [],
+    focusOn: [],
+    badHabit: [],
+    motivate: [],
+    workOutPlace: []
   ).obs;
+  final OnboardingRepository _repository =OnboardingRepository();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn =GoogleSignIn();
   late TextEditingController ageController;
   late TextEditingController heightCmController;
   late TextEditingController heightFeetController;
@@ -16,15 +25,17 @@ class OnboardingController extends GetxController {
   late TextEditingController weightKgController;
   late TextEditingController weightLbsController;
   late TextEditingController nameController;
+  late TextEditingController emailController;
+  late TextEditingController passwordController;
   var isCm = true.obs;
   var isKg = true.obs;
   var bmi = 0.0.obs;
   var bmiStatus = ''.obs;
   var remainder = true.obs;
-  final focuson = OnboardingModel(focusOn: []).obs;
-  final badHabitmodel = OnboardingModel(badHabit: []).obs;
-  final motivateModel =OnboardingModel(motivate: []).obs;
-  final workoutModel = OnboardingModel(workOutPlace:  []).obs;
+  // final focuson = OnboardingModel(focusOn: []).obs;
+  // final badHabitmodel = OnboardingModel(badHabit: []).obs;
+  // final motivateModel =OnboardingModel(motivate: []).obs;
+  // final workoutModel = OnboardingModel(workOutPlace:  []).obs;
   var progress =0.0.obs;
   var topMessage ='Analyzing your Data'.obs;
   var midMessage ='Plans for real Results'.obs;
@@ -39,6 +50,8 @@ class OnboardingController extends GetxController {
     weightKgController = TextEditingController();
     weightLbsController = TextEditingController();
     nameController = TextEditingController();
+    emailController = TextEditingController();
+    passwordController =TextEditingController();
     weightKgController.addListener(() => calculateBmi(weightKgController.text));
     weightLbsController.addListener(() => calculateBmi(weightLbsController.text));
   }
@@ -51,6 +64,8 @@ class OnboardingController extends GetxController {
     weightKgController.dispose();
     weightLbsController.dispose();
     nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
     weightKgController.removeListener(() => calculateBmi(weightKgController.text));
     weightLbsController.removeListener(() => calculateBmi(weightLbsController.text));
     super.onClose();
@@ -212,18 +227,18 @@ class OnboardingController extends GetxController {
     Get.toNamed(AppRoutes.ONBOARDING_FOCUSON);
   }
   void toggleFocusOn(String focusOn){
-    focuson.update((val){
+    onboarding.update((val){
       if(val!.focusOn!.contains(focusOn)){
         val.focusOn!.remove(focusOn);
       }else{
         val.focusOn!.add(focusOn);
       }
     });
-    print("updated focus on:${focuson.value.focusOn}");
+    print("updated focus on:${onboarding.value.focusOn}");
   }
   void submitFocusOn() {
-    if (focuson.value.focusOn!.isNotEmpty) {
-      print("Focus Areas Submitted: ${focuson.value.focusOn}");
+    if (onboarding.value.focusOn!.isNotEmpty) {
+      print("Focus Areas Submitted: ${onboarding.value.focusOn}");
       // Navigate to the next screen
       Get.toNamed(AppRoutes.ONBOARDING_WORKEXPERIANCE);
     } else {
@@ -304,18 +319,18 @@ class OnboardingController extends GetxController {
   }
 
   void togglebadHabit(String badHabit){
-    badHabitmodel.update((val){
+    onboarding.update((val){
       if(val!.badHabit!.contains(badHabit)){
         val.badHabit!.remove(badHabit);
       }else{
         val.badHabit!.add(badHabit);
       }
     });
-    print("updated bad habit on:${badHabitmodel.value.badHabit}");
+    print("updated bad habit on:${onboarding.value.badHabit}");
   }
   void submitBadhabit() {
-    if (badHabitmodel.value.badHabit!.isNotEmpty) {
-      print("badhabit Areas Submitted: ${badHabitmodel.value.badHabit}");
+    if (onboarding.value.badHabit!.isNotEmpty) {
+      print("badhabit Areas Submitted: ${onboarding.value.badHabit}");
       // Navigate to the next screen
       Get.toNamed(AppRoutes.ONBOARDING_LIFESTYLE);
     } else {
@@ -371,18 +386,18 @@ class OnboardingController extends GetxController {
   }
 
   void toggleMotivate(String motivate){
-    motivateModel.update((val){
+    onboarding.update((val){
       if(val!.motivate!.contains(motivate)){
         val.motivate!.remove(motivate);
       }else{
         val.motivate!.add(motivate);
       }
     });
-    print("updated motivate on:${motivateModel.value.motivate}");
+    print("updated motivate on:${onboarding.value.motivate}");
   }
   void submitMotivate() {
-    if (motivateModel.value.motivate!.isNotEmpty) {
-      print("motivate Areas Submitted: ${motivateModel.value.motivate}");
+    if (onboarding.value.motivate!.isNotEmpty) {
+      print("motivate Areas Submitted: ${onboarding.value.motivate}");
       // Navigate to the next screen
       Get.toNamed(AppRoutes.ONBOARDING_HEALTHIER);
     } else {
@@ -398,18 +413,18 @@ class OnboardingController extends GetxController {
     Get.toNamed(AppRoutes.ONBOARDING_WORKOUTPLACE);
   }
   void toggleWorkout(String workOutPlace){
-    workoutModel.update((val){
+    onboarding.update((val){
       if(val!.workOutPlace!.contains(workOutPlace)){
         val.workOutPlace!.remove(workOutPlace);
       }else{
         val.workOutPlace!.add(workOutPlace);
       }
     });
-    print("updated workout place on :${workoutModel.value.workOutPlace}");
+    print("updated workout place on :${onboarding.value.workOutPlace}");
   }
   void submitWorkout(){
-    if(workoutModel.value.workOutPlace!.isNotEmpty){
-      print("Workout areas submmited:${workoutModel.value.workOutPlace}");
+    if(onboarding.value.workOutPlace!.isNotEmpty){
+      print("Workout areas submmited:${onboarding.value.workOutPlace}");
       Get.toNamed(AppRoutes.ONBOARDING_EXCLUDELOUD);
     }else {
       // If the list is empty, show an error message
@@ -534,8 +549,129 @@ class OnboardingController extends GetxController {
       }
     });
   }
-  // void submitReady_plan(){
-  //   Get.toNamed(AppRoutes.ONBOARDING_PLAN_READY);
-  // }
+Future<void> handleGoogleSignIn()async {
+    try{
+      final GoogleSignInAccount ? googleUser = await _googleSignIn.signIn();
+      if (googleUser == null) {
+        // User cancelled the sign-in
+        return;
+      }
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      final UserCredential userCredential = await _auth.signInWithCredential(credential);
+      final User? user = userCredential.user;
+      print(user);
+      if(user != null){
+        final String? idToken = await user.getIdToken(true);
+        final String uid = user.uid;
+        final String email = user.email ?? '';
+        bool success = await _repository.registerUserWithProfile(idToken!, onboarding.value, uid, email);
+        if (success) {
+          print("Signup successful! Data saved to your backend.");
+          // Navigate to the next screen
+          Get.offAllNamed(AppRoutes.ONBOARDING_HOME);
+        } else {
+          Get.snackbar("Signup Failed", "Could not save profile to our server.");
+        }
+      }
+    }catch (e) {
+      Get.snackbar("Error", "Google Sign-In failed. Please try again.");
+      print("Google Sign In Error: $e");
+    }
+}
+  void submitHandleSigupPage(){
+    Get.toNamed(AppRoutes.ONBOARDING_SIGNUPWITHEMAIL);
+  }
+Future<void> handleSignupWithEmail()async{
+  try{
+    final email = emailController.text.trim();
+    final password  = passwordController.text.trim();
+    if(email.isEmpty || password.isEmpty){
+      Get.snackbar("Input Error", "Please enter both email and password");
+      return;
+    }
+    final UserCredential userCredential = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+    final User? user = userCredential.user;
+    if(user != null){
+      final String? idToken = await user.getIdToken(true);
+      final String uid = user.uid;
+      final String email = user.email ?? '';
+      bool success = await _repository.registerUserWithProfile(idToken!, onboarding.value, uid, email);
+      if (success) {
+        print("Signup successful! Data saved to your backend.");
+        // Navigate to the next screen
+        Get.offAllNamed(AppRoutes.ONBOARDING_HOME);
+      } else {
+        Get.snackbar("Signup Failed", "Could not save profile to our server.");
+      }
+    }
+  }catch (e) {
+    Get.snackbar("Error", "email Sign-In failed. Please try again.");
+    print("Email password SignIn : $e");
+  }
+}
 
+  Future<void> handleGoogleLogIn() async {
+    try {
+      print("Step 1: Starting Google Sign-In...");
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+
+      if (googleUser == null) {
+        print("Google Sign-In was cancelled by the user.");
+        return;
+      }
+      print("Step 2: Google Sign-In successful. User email: ${googleUser.email}");
+
+      if (googleUser.email == null || googleUser.email.isEmpty) {
+        print("CRITICAL ERROR: Google account did not return an email.");
+        Get.snackbar("Login Error", "Could not get email from your Google account. Please try again.");
+        await _googleSignIn.signOut();
+        return;
+      }
+
+      final userEmail = googleUser.email;
+      print("Step 3: Fetching sign-in methods for email: $userEmail");
+
+      final List<String> signInMethods =
+      await _auth.fetchSignInMethodsForEmail(userEmail);
+
+      print("Step 4: Found sign-in methods: $signInMethods");
+
+      if (signInMethods.isEmpty) {
+        print("Step 5a: No user found. Showing 'user does not exist' dialog.");
+        await _googleSignIn.signOut();
+        Get.dialog(
+          AlertDialog(
+            title: const Text("Login Failed"),
+            content: const Text("No account exists for this email. Please sign up first."),
+            actions: [
+              TextButton(
+                onPressed: () => Get.back(),
+                child: const Text("OK"),
+              ),
+            ],
+          ),
+        );
+      } else {
+        print("Step 5b: User found with methods: $signInMethods. Proceeding with Firebase sign-in.");
+        final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+
+        await _auth.signInWithCredential(credential);
+
+        print("Step 6: Google Login to Firebase successful!");
+        Get.offAllNamed(AppRoutes.ONBOARDING_HOME);
+      }
+    } catch (e) {
+      print("A critical error occurred during Google Log In: $e");
+      Get.snackbar("Login Error", "An unexpected error occurred. Please check the logs.");
+    }
+  }
 }
