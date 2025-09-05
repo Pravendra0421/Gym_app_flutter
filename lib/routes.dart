@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'onboarding/presentation_layer/bindings/onboarding_binding.dart';
+import 'My_PLAN/presentation_layer/bindings/my_plan_binding.dart';
 import 'onboarding/presentation_layer/screens/gender_screen.dart';
 import 'onboarding/presentation_layer/screens/age_screen.dart';
 import 'onboarding/presentation_layer/screens/tall_screen.dart';
@@ -294,7 +295,7 @@ class AppPages {
     GetPage(
         name: AppRoutes.ONBOARDING_HOME,
         page: ()=>HomeScreen(),
-        binding: OnboardingBinding(),
+        binding: MyPlanBinding(),
     ),
     GetPage(
         name: AppRoutes.ONBOARDING_SIGNUPWITHEMAIL,
